@@ -38,11 +38,11 @@ const chipCategories = [
 function ListingPlaceholder({ category }) {
   const cat = wasteCategories.find((c) => c.name === category);
   return (
-    <div className="w-full h-48 bg-surface rounded-t-xl flex items-center justify-center">
+    <div className="w-full h-[180px] bg-[#DDEEDF] flex items-center justify-center">
       <WasteIcon
         icon={cat?.icon || "package"}
-        size={48}
-        className="text-primary/30"
+        size={56}
+        className="text-[#388E3C] opacity-40"
       />
     </div>
   );
@@ -129,19 +129,22 @@ export default function MarketplacePage() {
 
         {/* Kota */}
         <div>
-          <h4 className="text-sm font-semibold text-text-primary mb-2">Kota</h4>
-          <select
-            value={selectedCity}
-            onChange={(e) => setSelectedCity(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-lg border border-surface bg-white text-sm"
-          >
-            <option value="">Semua Kota</option>
-            {cities.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
+          <h4 className="input-label">Kota</h4>
+          <div className="relative">
+            <select
+              value={selectedCity}
+              onChange={(e) => setSelectedCity(e.target.value)}
+              className="input-field appearance-none"
+            >
+              <option value="">Semua Kota</option>
+              {cities.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+            <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none" />
+          </div>
         </div>
 
         {/* Jenis Limbah */}
@@ -232,7 +235,7 @@ export default function MarketplacePage() {
         {/* Reset */}
         <button
           onClick={resetFilters}
-          className="w-full py-2.5 text-sm font-medium text-text-secondary border border-surface rounded-lg hover:border-primary hover:text-primary transition-all"
+          className="w-full btn-ghost border-surface hover:border-primary mt-4"
         >
           Reset Filters
         </button>
@@ -241,12 +244,12 @@ export default function MarketplacePage() {
   );
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-1 pt-16">
         {/* Category chips */}
         <div className="bg-white border-b border-surface">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <div className="container-main py-4">
             <div className="flex items-center gap-2 overflow-x-auto hide-scrollbar pb-1">
               {chipCategories.map((cat) => (
                 <button
@@ -265,7 +268,7 @@ export default function MarketplacePage() {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="container-main py-10">
           {/* Mobile filter toggle */}
           <div className="lg:hidden mb-4">
             <button
@@ -295,7 +298,7 @@ export default function MarketplacePage() {
           <div className="flex gap-8">
             {/* Desktop Sidebar */}
             <aside className="hidden lg:block w-[280px] flex-shrink-0">
-              <div className="bg-white rounded-xl p-6 ring-1 ring-green-100">
+              <div className="card-elevated p-6 sticky top-[100px]">
                 <FilterSidebar />
               </div>
             </aside>
@@ -340,36 +343,43 @@ export default function MarketplacePage() {
                       custom={i}
                     >
                       <Link href={`/marketplace/${listing.id}`}>
-                        <div className="bg-white rounded-xl ring-1 ring-green-100 overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
+                        <div className="card-elevated overflow-hidden group cursor-pointer flex flex-col h-full hover:shadow-lg transition-all duration-300">
                           {/* Image */}
                           <div className="relative">
                             <ListingPlaceholder category={listing.category} />
                             {/* Status badge */}
                             <span
-                              className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-medium ${statusColors[listing.status]}`}
+                              className={`absolute top-3 right-3 badge ${
+                                listing.status === "Tersedia" ? "badge-green" :
+                                listing.status === "Dalam Nego" ? "badge-yellow" : "badge-gray"
+                              }`}
                             >
                               {listing.status}
                             </span>
                             {/* Category badge */}
-                            <span className="absolute bottom-3 left-3 px-3 py-1 rounded-full text-xs font-medium bg-white/90 text-primary">
+                            <span className="absolute bottom-3 left-3 badge badge-surface border border-white/50 backdrop-blur-md bg-white/90">
                               {listing.category}
                             </span>
                           </div>
 
                           {/* Content */}
-                          <div className="p-4">
-                            <h3 className="text-sm font-semibold text-text-primary truncate group-hover:text-primary transition-colors">
+                          <div className="p-5 flex flex-col flex-1">
+                            <h3 className="text-[15px] font-bold text-text-primary line-clamp-2 group-hover:text-primary transition-colors">
                               {listing.title}
                             </h3>
-                            <p className="text-xs text-text-secondary mt-1">
-                              {listing.volume} · {listing.city}
+                            <p className="text-xs text-text-secondary mt-1.5 flex items-center gap-1.5">
+                              <span>{listing.volume}</span>
+                              <span className="w-1 h-1 rounded-full bg-surface" />
+                              <span>{listing.city}</span>
                             </p>
-                            <p className="text-lg font-bold text-primary mt-3">
-                              {listing.price}
-                            </p>
-                            <button className="w-full mt-3 py-2 text-xs font-medium text-primary border border-primary/30 rounded-lg hover:bg-primary hover:text-white transition-all duration-200">
-                              Hubungi Penjual
-                            </button>
+                            <div className="mt-auto pt-4">
+                              <p className="text-lg font-black text-primary mb-3">
+                                {listing.price}
+                              </p>
+                              <button className="w-full btn-outline py-2.5 text-xs">
+                                Hubungi Penjual
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </Link>
@@ -382,6 +392,6 @@ export default function MarketplacePage() {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -75,7 +75,7 @@ function CounterCard({ value, suffix, label, icon: Icon }) {
     <motion.div
       ref={ref}
       variants={scaleIn}
-      className="relative gradient-primary rounded-2xl p-8 text-white text-center flex-1 min-w-[200px] overflow-hidden group hover:shadow-xl hover:shadow-primary/20 transition-shadow duration-500"
+      className="relative gradient-primary rounded-2xl p-10 text-white text-center flex-1 min-w-[200px] overflow-hidden group hover:shadow-xl hover:shadow-primary/20 transition-shadow duration-500"
     >
       {/* Decorative glow */}
       <div className="absolute top-0 right-0 w-24 h-24 rounded-full bg-white/5 blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-white/10 transition-all duration-700" />
@@ -83,15 +83,15 @@ function CounterCard({ value, suffix, label, icon: Icon }) {
 
       <div className="relative z-10">
         {Icon && (
-          <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mx-auto mb-3">
-            <Icon size={20} className="text-white/70" />
+          <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center mx-auto mb-4">
+            <Icon size={28} className="text-white/70" />
           </div>
         )}
-        <div className="text-4xl sm:text-5xl font-bold mb-1 tracking-tight">
+        <div className="text-5xl sm:text-6xl font-bold mb-1 tracking-tight">
           {count.toLocaleString()}
-          {suffix && <span className="text-xl sm:text-2xl ml-1 font-semibold text-white/80">{suffix}</span>}
+          {suffix && <span className="text-2xl sm:text-3xl ml-1 font-semibold text-white/80">{suffix}</span>}
         </div>
-        <div className="text-white/50 text-xs font-medium uppercase tracking-wider mt-2">{label}</div>
+        <div className="text-white/60 text-sm font-medium uppercase tracking-wider mt-3">{label}</div>
       </div>
     </motion.div>
   );
@@ -165,12 +165,12 @@ export default function HomePage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 pt-[68px]">
+      <main className="flex-1 pt-16">
         {/* ═══ HERO ═══ */}
-        <section ref={heroRef} className="container-main py-6 sm:py-8">
+        <section ref={heroRef} className="container-main py-10 sm:py-16 lg:py-20 mb-8 sm:mb-16">
           <motion.div
             style={{ y: heroY, opacity: heroOpacity }}
-            className="relative overflow-hidden rounded-3xl min-h-[420px] sm:min-h-[480px] lg:min-h-[520px]"
+            className="relative overflow-hidden rounded-3xl min-h-[85vh] flex items-center"
           >
             {/* Gradient background */}
             <div className="absolute inset-0 gradient-hero" />
@@ -202,7 +202,7 @@ export default function HomePage() {
                   Platform Marketplace Limbah #1 Indonesia
                 </motion.div>
 
-                <h1 className="text-3xl sm:text-4xl lg:text-[52px] font-bold text-white leading-[1.1] mb-5 tracking-tight">
+                <h1 className="text-4xl sm:text-6xl lg:text-[72px] font-bold text-white leading-tight lg:leading-[1.1] mb-6 tracking-tight">
                   Connecting Urban
                   <br />
                   Waste to{" "}
@@ -210,7 +210,7 @@ export default function HomePage() {
                   <br />
                   Industry.
                 </h1>
-                <p className="text-white/60 text-sm sm:text-[15px] max-w-md mb-8 leading-[1.7]">
+                <p className="text-white/70 text-base sm:text-lg max-w-md mb-10 leading-[1.7]">
                   CitiZen connects waste-generating SMEs with waste processing
                   industries. Turn waste into economic value in a smooth and
                   organized manner.
@@ -218,15 +218,15 @@ export default function HomePage() {
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link
                     href="/dashboard/listing/baru"
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-primary font-semibold text-sm rounded-xl hover:bg-white/90 transition-all duration-300 hover:shadow-xl hover:shadow-white/10 hover:scale-[1.02] active:scale-[0.98]"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary font-bold text-base rounded-xl hover:bg-white/90 transition-all duration-300 hover:shadow-xl hover:shadow-white/10 hover:scale-[1.02] active:scale-[0.98]"
                   >
-                    <span className="text-lg leading-none">+</span> Sell Waste
+                    <span className="text-xl leading-none">+</span> Sell Waste
                   </Link>
                   <Link
                     href="/marketplace"
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white/10 border border-white/20 text-white font-medium text-sm rounded-xl hover:bg-white/20 transition-all duration-300 backdrop-blur-sm"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 border border-white/20 text-white font-semibold text-base rounded-xl hover:bg-white/20 transition-all duration-300 backdrop-blur-sm"
                   >
-                    Explore Market <ArrowRight size={15} />
+                    Explore Market <ArrowRight size={18} />
                   </Link>
                 </div>
               </motion.div>
@@ -244,18 +244,18 @@ export default function HomePage() {
         </section>
 
         {/* ═══ HOW IT WORKS ═══ */}
-        <section className="py-20 sm:py-28 bg-white">
+        <section className="py-24 sm:py-32 bg-white">
           <div className="container-main">
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
               variants={fadeUp}
-              className="text-center mb-16"
+              className="flex flex-col items-center text-center mb-16"
             >
               <span className="badge badge-green text-xs mb-4 inline-block">Proses Mudah</span>
               <h2 className="section-title">How It Works?</h2>
-              <p className="section-subtitle max-w-md mx-auto">
+              <p className="section-subtitle text-center max-w-md mt-2">
                 3 langkah sederhana menuju dunia zero-waste
               </p>
             </motion.div>
@@ -296,16 +296,16 @@ export default function HomePage() {
                   custom={i}
                   className="relative z-10 flex-1 flex flex-col items-center text-center px-6"
                 >
-                  <div className={`w-[72px] h-[72px] rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center mb-5 shadow-lg shadow-primary/15 hover:shadow-xl hover:shadow-primary/25 hover:scale-105 transition-all duration-500`}>
-                    <step.icon size={28} className="text-white" />
+                  <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center mb-6 shadow-lg shadow-primary/15 hover:shadow-xl hover:shadow-primary/25 hover:scale-105 transition-all duration-500`}>
+                    <step.icon size={36} className="text-white" />
                   </div>
-                  <span className="text-[11px] font-bold text-primary/40 uppercase tracking-wider mb-1.5">
+                  <span className="text-[13px] font-bold text-primary/60 uppercase tracking-wider mb-2">
                     Step {i + 1}
                   </span>
-                  <h3 className="text-lg font-bold text-text-primary mb-2">
+                  <h3 className="text-xl font-bold text-text-primary mb-3">
                     {step.title}
                   </h3>
-                  <p className="text-text-secondary text-[13px] leading-[1.7] max-w-[220px]">
+                  <p className="text-text-secondary text-[15px] leading-[1.7] max-w-[260px]">
                     {step.desc}
                   </p>
                 </motion.div>
@@ -315,7 +315,7 @@ export default function HomePage() {
         </section>
 
         {/* ═══ WASTE CATEGORY ═══ */}
-        <section className="relative py-20 sm:py-28 overflow-hidden">
+        <section className="relative py-24 sm:py-32 overflow-hidden">
           {/* Background */}
           <div className="absolute inset-0 gradient-dark" />
           <div className="absolute inset-0 opacity-[0.04]" style={{
@@ -350,17 +350,17 @@ export default function HomePage() {
                   key={cat.id}
                   variants={fadeUp}
                   custom={i}
-                  className="group relative glass-card rounded-2xl p-5 flex items-center gap-4 cursor-pointer hover:bg-white/[0.15] transition-all duration-500"
+                  className="group relative glass-card rounded-2xl p-6 flex items-center gap-5 cursor-pointer hover:bg-white/[0.15] transition-all duration-500"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-white/[0.08] flex items-center justify-center flex-shrink-0 group-hover:bg-white/15 group-hover:scale-110 transition-all duration-500">
-                    <WasteIcon icon={cat.icon} size={22} className="text-secondary" />
+                  <div className="w-16 h-16 rounded-xl bg-white/[0.08] flex items-center justify-center flex-shrink-0 group-hover:bg-white/15 group-hover:scale-110 transition-all duration-500">
+                    <WasteIcon icon={cat.icon} size={28} className="text-secondary" />
                   </div>
                   <div className="min-w-0">
-                    <h3 className="text-white font-semibold text-sm group-hover:text-secondary transition-colors duration-300">
+                    <h3 className="text-white font-bold text-base group-hover:text-secondary transition-colors duration-300">
                       {cat.name}
                     </h3>
-                    <p className="text-white/35 text-xs mt-0.5 flex items-center gap-1">
-                      <ArrowRight size={10} /> {cat.conversion}
+                    <p className="text-white/50 text-sm mt-1 flex items-center gap-1.5">
+                      <ArrowRight size={14} /> {cat.conversion}
                     </p>
                   </div>
                   {/* Hover glow */}
@@ -372,10 +372,10 @@ export default function HomePage() {
               <motion.div variants={fadeUp} custom={5}>
                 <Link
                   href="/info-limbah"
-                  className="h-full min-h-[76px] rounded-2xl p-5 flex items-center justify-center gap-2 border-2 border-dashed border-white/15 text-white/40 hover:text-white hover:border-white/30 transition-all duration-500 group"
+                  className="h-full min-h-[88px] rounded-2xl p-6 flex items-center justify-center gap-2 border-2 border-dashed border-white/20 text-white/50 hover:text-white hover:bg-white/5 transition-all duration-500 group"
                 >
-                  <span className="text-sm font-medium">All waste category</span>
-                  <ChevronRight size={15} className="group-hover:translate-x-1 transition-transform duration-300" />
+                  <span className="text-base font-semibold">All waste category</span>
+                  <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
               </motion.div>
             </motion.div>
@@ -383,7 +383,7 @@ export default function HomePage() {
         </section>
 
         {/* ═══ REAL IMPACTS ═══ */}
-        <section className="py-20 sm:py-28">
+        <section className="py-24 sm:py-32">
           <div className="container-main max-w-5xl">
             <motion.div
               initial="hidden"
@@ -412,7 +412,7 @@ export default function HomePage() {
         </section>
 
         {/* ═══ TESTIMONIALS ═══ */}
-        <section className="py-20 sm:py-28 bg-white">
+        <section className="py-24 sm:py-32 bg-white">
           <div className="container-main max-w-6xl">
             <motion.div
               initial="hidden"
@@ -438,22 +438,22 @@ export default function HomePage() {
                   key={t.name}
                   variants={fadeUp}
                   custom={i}
-                  className="card-elevated p-7 group"
+                  className="card-elevated p-8 group"
                 >
                   {/* Quote icon */}
-                  <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center mb-5 group-hover:bg-secondary/20 transition-colors duration-300">
-                    <Quote size={18} className="text-secondary" fill="currentColor" />
+                  <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 group-hover:bg-secondary/20 transition-colors duration-300">
+                    <Quote size={22} className="text-secondary" fill="currentColor" />
                   </div>
-                  <p className="text-text-primary text-sm leading-[1.8] mb-7">
+                  <p className="text-text-primary text-base leading-[1.8] mb-8">
                     &ldquo;{t.quote}&rdquo;
                   </p>
-                  <div className="flex items-center gap-3 pt-5 border-t border-surface/60">
-                    <div className="w-11 h-11 rounded-full gradient-primary flex items-center justify-center text-white text-xs font-bold shadow-md shadow-primary/15">
+                  <div className="flex items-center gap-4 pt-6 border-t border-surface">
+                    <div className="w-12 h-12 rounded-full gradient-primary flex items-center justify-center text-white text-base font-bold shadow-md shadow-primary/15">
                       {t.initials}
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-text-primary">{t.name}</div>
-                      <div className="text-[11px] text-text-secondary">{t.role}</div>
+                      <div className="text-base font-bold text-text-primary">{t.name}</div>
+                      <div className="text-sm text-text-secondary">{t.role}</div>
                     </div>
                   </div>
                 </motion.div>
@@ -463,7 +463,7 @@ export default function HomePage() {
         </section>
 
         {/* ═══ CTA BANNER ═══ */}
-        <section className="container-main py-12">
+        <section className="container-main py-20 sm:py-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -485,13 +485,13 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
                   href="/dashboard/listing/baru"
-                  className="px-8 py-3.5 bg-primary-dark text-white font-semibold text-sm rounded-xl hover:bg-[#0D3B10] transition-all duration-300 hover:shadow-xl hover:shadow-primary-dark/30 hover:scale-[1.02] active:scale-[0.98]"
+                  className="px-8 py-4 bg-white text-primary font-bold text-base rounded-xl hover:bg-surface transition-all duration-300 shadow-xl hover:scale-[1.02] active:scale-[0.98]"
                 >
                   Jual Limbah Sekarang
                 </Link>
                 <Link
                   href="/marketplace"
-                  className="px-8 py-3.5 border-2 border-white/40 text-white font-semibold text-sm rounded-xl hover:bg-white hover:text-primary-dark transition-all duration-300"
+                  className="px-8 py-4 border-2 border-white/60 text-white font-bold text-base rounded-xl hover:bg-white hover:text-primary-dark transition-all duration-300"
                 >
                   Lihat Marketplace
                 </Link>
@@ -500,8 +500,6 @@ export default function HomePage() {
           </motion.div>
         </section>
 
-        {/* Spacer before footer */}
-        <div className="h-8" />
       </main>
       <Footer />
     </>

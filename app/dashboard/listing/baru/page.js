@@ -32,11 +32,11 @@ export default function CreateListingPage() {
 
         <form
           onSubmit={(e) => e.preventDefault()}
-          className="bg-white rounded-xl p-6 sm:p-8 ring-1 ring-green-100 space-y-6"
+          className="card-elevated p-6 sm:p-8 space-y-6"
         >
           {/* Upload foto */}
           <div>
-            <label className="block text-sm font-semibold text-primary mb-2">
+            <label className="input-label">
               Upload Foto
             </label>
             <div className="border-2 border-dashed border-surface rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-primary hover:bg-surface/30 transition-all group">
@@ -54,27 +54,27 @@ export default function CreateListingPage() {
 
           {/* Nama Limbah */}
           <div>
-            <label className="block text-sm font-semibold text-primary mb-1.5">
+            <label className="input-label">
               Nama Limbah
             </label>
             <input
               type="text"
               value={namaLimbah}
               onChange={(e) => setNamaLimbah(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-surface bg-background text-sm text-text-primary"
+              className="input-field"
               placeholder="Contoh: Minyak Jelantah Restoran"
             />
           </div>
 
           {/* Jenis Limbah */}
           <div>
-            <label className="block text-sm font-semibold text-primary mb-1.5">
+            <label className="input-label">
               Jenis Limbah
             </label>
             <select
               value={jenisLimbah}
               onChange={(e) => setJenisLimbah(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-surface bg-background text-sm text-text-primary"
+              className="input-field appearance-none"
             >
               <option value="">Pilih jenis limbah...</option>
               {wasteCategories.slice(0, 5).map((cat) => (
@@ -88,25 +88,25 @@ export default function CreateListingPage() {
           {/* Volume + Satuan */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-semibold text-primary mb-1.5">
+              <label className="input-label">
                 Volume
               </label>
               <input
                 type="number"
                 value={volume}
                 onChange={(e) => setVolume(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-surface bg-background text-sm text-text-primary"
+                className="input-field"
                 placeholder="0"
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-primary mb-1.5">
+              <label className="input-label">
                 Satuan
               </label>
               <select
                 value={satuan}
                 onChange={(e) => setSatuan(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-surface bg-background text-sm text-text-primary"
+                className="input-field appearance-none"
               >
                 <option value="kg">kg</option>
                 <option value="liter">liter</option>
@@ -117,7 +117,7 @@ export default function CreateListingPage() {
 
           {/* Kondisi */}
           <div>
-            <label className="block text-sm font-semibold text-primary mb-2">
+            <label className="input-label">
               Kondisi
             </label>
             <div className="flex gap-3">
@@ -146,7 +146,7 @@ export default function CreateListingPage() {
 
           {/* Harga */}
           <div>
-            <label className="block text-sm font-semibold text-primary mb-1.5">
+            <label className="input-label">
               Harga (per {satuan})
             </label>
             <div className="flex items-center gap-4">
@@ -159,7 +159,7 @@ export default function CreateListingPage() {
                   value={harga}
                   onChange={(e) => setHarga(e.target.value)}
                   disabled={gratis}
-                  className={`w-full pl-12 pr-4 py-3 rounded-lg border border-surface bg-background text-sm text-text-primary ${
+                  className={`input-field pl-12 ${
                     gratis ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                   placeholder="0"
@@ -179,13 +179,13 @@ export default function CreateListingPage() {
 
           {/* Kota */}
           <div>
-            <label className="block text-sm font-semibold text-primary mb-1.5">
+            <label className="input-label">
               Kota
             </label>
             <select
               value={kota}
               onChange={(e) => setKota(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-surface bg-background text-sm text-text-primary"
+              className="input-field appearance-none"
             >
               <option value="">Pilih kota...</option>
               {cities.map((c) => (
@@ -198,14 +198,14 @@ export default function CreateListingPage() {
 
           {/* Deskripsi */}
           <div>
-            <label className="block text-sm font-semibold text-primary mb-1.5">
+            <label className="input-label">
               Deskripsi
             </label>
             <textarea
               value={deskripsi}
               onChange={(e) => setDeskripsi(e.target.value)}
               rows={4}
-              className="w-full px-4 py-3 rounded-lg border border-surface bg-background text-sm text-text-primary resize-none"
+              className="input-field resize-none"
               placeholder="Jelaskan detail limbah Anda..."
             />
           </div>
@@ -213,7 +213,7 @@ export default function CreateListingPage() {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full py-3.5 bg-primary text-white font-semibold text-sm rounded-lg hover:bg-primary-dark transition-all duration-200 flex items-center justify-center gap-2 hover:shadow-lg"
+            className="w-full btn-primary py-3.5 mt-4"
           >
             <Upload size={16} />
             Publikasikan Listing

@@ -66,9 +66,9 @@ export default function DashboardLayout({ children }) {
                 key={link.href}
                 href={link.href}
                 onClick={() => setSidebarOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
                   isActive
-                    ? "bg-primary text-white"
+                    ? "gradient-primary text-white shadow-lg shadow-primary/20"
                     : "text-text-secondary hover:bg-surface hover:text-primary"
                 }`}
               >

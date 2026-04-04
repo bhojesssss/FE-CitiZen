@@ -63,7 +63,7 @@ export default function DashboardPage() {
         </div>
         <Link
           href="/dashboard/listing/baru"
-          className="flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary-dark transition-all duration-200 hover:scale-105"
+          className="btn-primary"
         >
           <Plus size={16} />
           Buat Listing Baru
@@ -82,7 +82,7 @@ export default function DashboardPage() {
             key={card.label}
             variants={fadeUp}
             custom={i}
-            className="bg-white rounded-xl p-5 ring-1 ring-green-100 flex items-center gap-4"
+            className="card-elevated p-6 flex items-center gap-5"
           >
             <div
               className={`w-12 h-12 rounded-xl ${card.color} flex items-center justify-center`}
@@ -102,7 +102,7 @@ export default function DashboardPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="bg-white rounded-xl ring-1 ring-green-100 overflow-hidden"
+        className="card-elevated overflow-hidden"
       >
         <div className="px-6 py-4 border-b border-surface">
           <h2 className="text-lg font-semibold text-text-primary">
@@ -153,7 +153,10 @@ export default function DashboardPage() {
                   </td>
                   <td className="px-6 py-4">
                     <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[listing.status]}`}
+                      className={`badge ${
+                        listing.status === "Tersedia" ? "badge-green" :
+                        listing.status === "Dalam Nego" ? "badge-yellow" : "badge-gray"
+                      }`}
                     >
                       {listing.status}
                     </span>

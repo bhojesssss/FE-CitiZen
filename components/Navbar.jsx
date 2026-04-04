@@ -16,25 +16,7 @@ const navLinks = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setScrolled(currentScrollY > 20);
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
-      setLastScrollY(currentScrollY);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
 
   useEffect(() => {
     setMobileOpen(false);
@@ -52,144 +34,114 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -80 }}
-        animate={{ y: hidden && !mobileOpen ? -80 : 0 }}
-        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "glass-navbar shadow-[0_1px_20px_rgba(0,0,0,0.04)]"
-            : "bg-white/0"
-        }`}
-      >
-        <div className="container-main">
-          <div className="flex items-center justify-between h-[68px]">
-            {/* Logo */}
-            <Link href="/" className="flex-shrink-0 relative z-10">
-              <Logo size="md" />
-            </Link>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-[#DDEEDF] h-16">
+        <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+          {/* Left: Logo */}
+          <Link href="/" className="flex-shrink-0">
+            <Logo size="md" />
+          </Link>
 
-            {/* Desktop nav links — pill style */}
-            <div className="hidden md:flex items-center bg-surface/40 rounded-full px-1.5 py-1.5">
+          {/* Middle: Desktop Nav Links */}
+          <div className="hidden md:flex items-center gap-8 mx-auto">
+            {navLinks.map((link) => {
+              const active = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-sm transition-colors py-1 ${
+                    active
+                      ? "text-[#388E3C] font-semibold border-b-2 border-[#388E3C]"
+                      : "font-medium text-[#212121] hover:text-[#388E3C] border-b-2 border-transparent"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Right: Desktop Auth Buttons */}
+          <div className="hidden md:flex items-center gap-3 flex-shrink-0">
+            <Link
+              href="/login"
+              className="border border-[#388E3C] text-[#388E3C] px-4 py-2 rounded-lg text-sm hover:bg-[#DDEEDF] transition"
+            >
+              Login
+            </Link>
+            <Link
+              href="/register"
+              className="bg-[#388E3C] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1B5E20] transition"
+            >
+              Register
+            </Link>
+          </div>
+
+          {/* Right: Mobile hamburger */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-lg text-[#212121] hover:bg-[#DDEEDF] transition flex-shrink-0"
+            aria-label="Toggle menu"
+          >
+            <AnimatePresence mode="wait">
+              {mobileOpen ? (
+                <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <X size={22} />
+                </motion.div>
+              ) : (
+                <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <Menu size={22} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile dropdown menu (Header offset by pt-16) */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-x-0 top-16 z-40 bg-white border-b border-[#DDEEDF] shadow-lg md:hidden"
+          >
+            <div className="py-4 px-6 flex flex-col space-y-2">
               {navLinks.map((link) => {
                 const active = pathname === link.href;
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`relative px-5 py-2 text-[13px] font-medium rounded-full transition-all duration-300 ${
+                    className={`flex items-center justify-between py-3 px-4 rounded-xl text-sm transition-all ${
                       active
-                        ? "text-white"
-                        : "text-text-secondary hover:text-primary"
+                        ? "bg-[#388E3C]/10 text-[#388E3C] font-semibold"
+                        : "text-[#212121] font-medium hover:bg-[#DDEEDF]"
                     }`}
                   >
-                    {active && (
-                      <motion.div
-                        layoutId="nav-pill"
-                        className="absolute inset-0 gradient-primary rounded-full"
-                        transition={{
-                          type: "spring",
-                          stiffness: 380,
-                          damping: 30,
-                        }}
-                      />
-                    )}
-                    <span className="relative z-10">{link.label}</span>
+                    {link.label}
+                    <ChevronRight size={16} className={active ? "text-[#388E3C]" : "text-[#212121]/40"} />
                   </Link>
                 );
               })}
-            </div>
-
-            {/* Desktop auth buttons */}
-            <div className="hidden md:flex items-center gap-3">
-              <Link href="/login" className="btn-ghost text-[13px] py-2 px-5">
-                Login
-              </Link>
-              <Link href="/register" className="btn-primary text-[13px] py-2 px-5 shadow-none">
-                Register
-              </Link>
-            </div>
-
-            {/* Mobile hamburger */}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden relative z-10 w-10 h-10 flex items-center justify-center rounded-xl text-text-primary hover:bg-surface/60 transition-colors"
-              aria-label="Toggle menu"
-            >
-              <AnimatePresence mode="wait">
-                {mobileOpen ? (
-                  <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                    <X size={22} />
-                  </motion.div>
-                ) : (
-                  <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                    <Menu size={22} />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </button>
-          </div>
-        </div>
-      </motion.nav>
-
-      {/* Mobile fullscreen menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 md:hidden"
-          >
-            {/* Backdrop */}
-            <div className="absolute inset-0 bg-background/95 backdrop-blur-xl" onClick={() => setMobileOpen(false)} />
-
-            {/* Content */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              className="relative z-10 pt-24 px-6 flex flex-col h-full"
-            >
-              <div className="flex-1 space-y-2">
-                {navLinks.map((link, i) => (
-                  <motion.div
-                    key={link.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.15 + i * 0.05 }}
-                  >
-                    <Link
-                      href={link.href}
-                      className={`flex items-center justify-between px-5 py-4 rounded-2xl text-lg font-medium transition-all ${
-                        pathname === link.href
-                          ? "gradient-primary text-white shadow-lg shadow-primary/20"
-                          : "text-text-primary hover:bg-surface/60"
-                      }`}
-                    >
-                      {link.label}
-                      <ChevronRight size={18} className={pathname === link.href ? "text-white/60" : "text-text-secondary/40"} />
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="pb-10 space-y-3"
-              >
-                <Link href="/login" className="block w-full text-center btn-outline py-3.5 rounded-2xl text-base">
+              
+              <div className="pt-4 mt-2 border-t border-[#DDEEDF] flex flex-col gap-3">
+                <Link
+                  href="/login"
+                  className="w-full text-center border border-[#388E3C] text-[#388E3C] px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-[#DDEEDF] transition"
+                >
                   Login
                 </Link>
-                <Link href="/register" className="block w-full text-center btn-primary py-3.5 rounded-2xl text-base">
+                <Link
+                  href="/register"
+                  className="w-full text-center bg-[#388E3C] text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-[#1B5E20] transition"
+                >
                   Register
                 </Link>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

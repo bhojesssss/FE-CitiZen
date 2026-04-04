@@ -24,7 +24,7 @@ export default function ProfilPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="bg-white rounded-xl p-6 sm:p-8 ring-1 ring-green-100"
+        className="card-elevated p-6 sm:p-8"
       >
         {/* Avatar */}
         <div className="flex items-center gap-4 mb-8 pb-6 border-b border-surface">
@@ -39,68 +39,68 @@ export default function ProfilPage() {
 
         <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
           <div>
-            <label className="block text-sm font-semibold text-primary mb-1.5">
+            <label className="input-label">
               Nama Usaha
             </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-surface bg-background text-sm"
+              className="input-field"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-primary mb-1.5">
+            <label className="input-label">
               Email
             </label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-surface bg-background text-sm"
+              className="input-field"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-primary mb-1.5">
+            <label className="input-label">
               Nomor Telepon
             </label>
             <input
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-surface bg-background text-sm"
+              className="input-field"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-primary mb-1.5">
+            <label className="input-label">
               Kota
             </label>
             <input
               type="text"
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-surface bg-background text-sm"
+              className="input-field"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-primary mb-1.5">
+            <label className="input-label">
               Bio
             </label>
             <textarea
               value={bio}
               onChange={(e) => setBio(e.target.value)}
               rows={3}
-              className="w-full px-4 py-3 rounded-lg border border-surface bg-background text-sm resize-none"
+              className="input-field resize-none"
             />
           </div>
 
           <button
             type="submit"
-            className="flex items-center gap-2 px-6 py-3 bg-primary text-white font-semibold text-sm rounded-lg hover:bg-primary-dark transition-all"
+            className="btn-primary"
           >
             <Save size={16} />
             Simpan Perubahan

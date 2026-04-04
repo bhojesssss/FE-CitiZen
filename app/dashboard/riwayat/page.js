@@ -60,7 +60,7 @@ export default function RiwayatPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="bg-white rounded-xl ring-1 ring-green-100 overflow-hidden"
+        className="card-elevated overflow-hidden"
       >
         <div className="divide-y divide-surface">
           {transactions.map((tx) => (

@@ -44,72 +44,84 @@ export default function KebutuhanPage() {
   }, [searchQuery, selectedCity, selectedCategory]);
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-1 pt-16">
-        {/* Hero */}
-        <div className="bg-white border-b border-surface">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-text-primary mb-1">
-                  Kebutuhan Limbah
-                </h1>
-                <p className="text-sm text-text-secondary">
-                  Perusahaan yang sedang mencari limbah sebagai bahan baku
-                </p>
-              </div>
-              <button className="flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary-dark transition-all duration-200 hover:scale-105">
-                <Plus size={16} />
-                Buat Kebutuhan
-              </button>
+        {/* Page Header */}
+        <section className="bg-primary/5 py-12 sm:py-16 border-b border-surface/50 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full opacity-30" style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, #388E3C 1px, transparent 0)`,
+            backgroundSize: '32px 32px'
+          }} />
+          <div className="container-main relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div>
+              <h1 className="text-3xl sm:text-4xl font-bold text-text-primary mb-3">
+                Kebutuhan Limbah
+              </h1>
+              <p className="text-base text-text-secondary max-w-lg">
+                Perusahaan yang sedang mencari limbah sebagai bahan baku. Temukan pembeli untuk limbah Anda sekarang.
+              </p>
             </div>
+            <button className="btn-primary flex-shrink-0">
+              <Plus size={18} />
+              Buat Kebutuhan
+            </button>
+          </div>
+        </section>
 
-            {/* Filter bar */}
-            <div className="flex flex-col sm:flex-row items-stretch gap-3 mt-6">
+        {/* Filter bar Container */}
+        <div className="bg-white border-b border-surface">
+          <div className="container-main py-4">
+            <div className="flex flex-col sm:flex-row items-stretch gap-3">
               <div className="relative flex-1">
                 <Search
-                  size={16}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary"
+                  size={18}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary"
                 />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Cari perusahaan atau jenis limbah..."
-                  className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-surface bg-background text-sm"
+                  className="input-field pl-12"
                 />
               </div>
-              <select
-                value={selectedCity}
-                onChange={(e) => setSelectedCity(e.target.value)}
-                className="px-4 py-2.5 rounded-lg border border-surface bg-background text-sm min-w-[140px]"
-              >
-                <option value="">Semua Kota</option>
-                {cities.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </select>
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-4 py-2.5 rounded-lg border border-surface bg-background text-sm min-w-[160px]"
-              >
-                <option value="">Semua Jenis</option>
-                {wasteCategories.slice(0, 5).map((cat) => (
-                  <option key={cat.id} value={cat.id}>
-                    {cat.name}
-                  </option>
-                ))}
-              </select>
+              <div className="relative min-w-[140px]">
+                <select
+                  value={selectedCity}
+                  onChange={(e) => setSelectedCity(e.target.value)}
+                  className="input-field appearance-none bg-white relative z-10 bg-transparent"
+                >
+                  <option value="">Semua Kota</option>
+                  {cities.map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none z-0">▼</div>
+              </div>
+              <div className="relative min-w-[160px]">
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="input-field appearance-none bg-white relative z-10 bg-transparent"
+                >
+                  <option value="">Semua Jenis</option>
+                  {wasteCategories.slice(0, 5).map((cat) => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none z-0">▼</div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Grid */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="container-main py-10">
           <div className="text-sm text-text-secondary mb-4">
             {filteredNeeds.length} kebutuhan ditemukan
           </div>
@@ -138,11 +150,11 @@ export default function KebutuhanPage() {
                   key={need.id}
                   variants={fadeUp}
                   custom={i}
-                  className="bg-white rounded-xl p-5 ring-1 ring-green-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+                  className="bg-white rounded-xl border border-[#DDEEDF] shadow-sm hover:shadow-md transition-all duration-200 p-6 flex flex-col items-start"
                 >
                   {/* Company header */}
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center text-white font-bold text-xs">
+                    <div className="w-10 h-10 rounded-full bg-[#388E3C] flex items-center justify-center text-white font-bold text-xs ring-2 ring-[#DDEEDF]">
                       {need.company
                         .split(" ")
                         .map((w) => w[0])
@@ -161,7 +173,7 @@ export default function KebutuhanPage() {
                   </div>
 
                   {/* Category badge */}
-                  <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-surface text-primary mb-3">
+                  <span className="badge badge-surface mb-4">
                     {need.category}
                   </span>
 
@@ -194,9 +206,11 @@ export default function KebutuhanPage() {
                     </div>
                   </div>
 
-                  <button className="w-full py-2.5 text-xs font-medium text-primary border border-primary/30 rounded-lg hover:bg-primary hover:text-white transition-all duration-200">
-                    Tawarkan Limbah Saya
-                  </button>
+                  <div className="w-full mt-auto pt-4 border-t border-surface/50">
+                    <button className="w-full btn-outline py-2.5 text-xs">
+                      Tawarkan Limbah Saya
+                    </button>
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
@@ -204,6 +218,6 @@ export default function KebutuhanPage() {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

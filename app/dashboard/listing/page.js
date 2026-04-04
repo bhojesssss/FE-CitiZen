@@ -23,7 +23,7 @@ export default function ListingSayaPage() {
         </div>
         <Link
           href="/dashboard/listing/baru"
-          className="flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary-dark transition-all"
+          className="btn-primary"
         >
           <Plus size={16} />
           Buat Listing Baru
@@ -39,7 +39,7 @@ export default function ListingSayaPage() {
         {dashboardListings.map((listing) => (
           <div
             key={listing.id}
-            className="bg-white rounded-xl ring-1 ring-green-100 overflow-hidden hover:shadow-md transition-all duration-300"
+            className="card-elevated overflow-hidden group flex flex-col"
           >
             <div className="h-36 bg-surface flex items-center justify-center">
               <span className="text-3xl text-primary/20">📦</span>
@@ -50,7 +50,10 @@ export default function ListingSayaPage() {
                   {listing.name}
                 </h3>
                 <span
-                  className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${statusColors[listing.status]} flex-shrink-0`}
+                  className={`badge ${
+                    listing.status === "Tersedia" ? "badge-green" :
+                    listing.status === "Dalam Nego" ? "badge-yellow" : "badge-gray"
+                  } flex-shrink-0`}
                 >
                   {listing.status}
                 </span>
@@ -61,12 +64,12 @@ export default function ListingSayaPage() {
               <p className="text-sm font-bold text-primary mb-3">
                 {listing.price}
               </p>
-              <div className="flex gap-2">
-                <button className="flex-1 flex items-center justify-center gap-1 py-2 text-xs font-medium text-text-secondary border border-surface rounded-lg hover:border-primary hover:text-primary transition-all">
-                  <Eye size={12} /> Lihat
+              <div className="flex gap-2.5 mt-auto pt-2">
+                <button className="flex-1 btn-ghost border-surface py-2 text-xs">
+                  <Eye size={14} /> Lihat
                 </button>
-                <button className="flex-1 flex items-center justify-center gap-1 py-2 text-xs font-medium text-text-secondary border border-surface rounded-lg hover:border-primary hover:text-primary transition-all">
-                  <Edit size={12} /> Edit
+                <button className="flex-1 btn-ghost border-surface py-2 text-xs">
+                  <Edit size={14} /> Edit
                 </button>
                 <button className="flex items-center justify-center p-2 text-xs text-text-secondary border border-surface rounded-lg hover:border-red-300 hover:text-red-500 transition-all">
                   <Trash2 size={12} />

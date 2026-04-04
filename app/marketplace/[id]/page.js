@@ -40,10 +40,10 @@ export default function ListingDetailPage({ params }) {
         ];
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-1 pt-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="container-main py-10">
           {/* Back link */}
           <Link
             href="/marketplace"
@@ -62,11 +62,11 @@ export default function ListingDetailPage({ params }) {
               className="lg:col-span-3"
             >
               {/* Image placeholder */}
-              <div className="w-full h-64 sm:h-80 bg-surface rounded-xl flex items-center justify-center mb-6">
+              <div className="w-full h-[350px] bg-[#DDEEDF] rounded-2xl flex items-center justify-center mb-8 shadow-inner shadow-primary/5">
                 <WasteIcon
                   icon={cat?.icon || "package"}
-                  size={64}
-                  className="text-primary/20"
+                  size={80}
+                  className="text-[#388E3C] opacity-40"
                 />
               </div>
 
@@ -119,8 +119,8 @@ export default function ListingDetailPage({ params }) {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="lg:col-span-2"
             >
-              <div className="bg-white rounded-xl p-6 ring-1 ring-green-100 sticky top-20">
-                <h3 className="text-sm font-semibold text-text-primary mb-4">
+              <div className="card-elevated p-8 sticky top-24">
+                <h3 className="text-sm font-semibold text-text-primary mb-6 uppercase tracking-wider">
                   Informasi Penjual
                 </h3>
 
@@ -150,7 +150,7 @@ export default function ListingDetailPage({ params }) {
                   </span>
                 </div>
 
-                <button className="w-full py-3 bg-primary text-white font-semibold text-sm rounded-lg hover:bg-primary-dark transition-all duration-200 hover:shadow-lg">
+                <button className="w-full btn-primary py-3.5 mt-2">
                   Hubungi Penjual
                 </button>
               </div>
@@ -170,15 +170,15 @@ export default function ListingDetailPage({ params }) {
                   );
                   return (
                     <Link key={item.id} href={`/marketplace/${item.id}`}>
-                      <div className="w-[220px] flex-shrink-0 bg-white rounded-xl ring-1 ring-green-100 overflow-hidden hover:shadow-md transition-all duration-300 group cursor-pointer">
-                        <div className="w-full h-32 bg-surface flex items-center justify-center">
+                      <div className="w-[240px] flex-shrink-0 card-flat p-0 overflow-hidden hover:shadow-md hover:border-primary/30 transition-all duration-300 group cursor-pointer">
+                        <div className="w-full h-36 bg-[#DDEEDF] flex items-center justify-center">
                           <WasteIcon
                             icon={itemCat?.icon || "package"}
-                            size={32}
-                            className="text-primary/20"
+                            size={40}
+                            className="text-[#388E3C] opacity-40"
                           />
                         </div>
-                        <div className="p-3">
+                        <div className="p-4">
                           <h4 className="text-xs font-semibold text-text-primary truncate group-hover:text-primary transition-colors">
                             {item.title}
                           </h4>
@@ -196,6 +196,6 @@ export default function ListingDetailPage({ params }) {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
