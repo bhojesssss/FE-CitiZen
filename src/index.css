@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .hero-gradient {
+    background: linear-gradient(135deg, #388E3C 0%, #4CAF50 100%);
+  }
+
+  .category-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .category-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .impact-card {
+    background: #2E7D32;
+    transition: transform 0.3s ease;
+  }
+
+  .impact-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .step-line {
+    position: absolute;
+    top: 40px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    border-top: 2px dashed #D1D5DB;
+    z-index: 0;
+  }
+}
