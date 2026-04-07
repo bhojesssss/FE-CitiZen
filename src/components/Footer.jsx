@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 text-center">
         <div className="flex justify-center items-center mb-8">
           <FaLeaf className="text-[#388E3C] text-2xl mr-2" />
-          <span className="text-2xl font-bold text-gray-800">City Zen</span>
+          <span className="text-2xl font-bold text-gray-800">CityZen</span>
         </div>
         <div className="flex justify-center space-x-6 mb-10 text-gray-400">
           <a href="#" className="hover:text-[#388E3C] transition-colors"><FaInstagram className="text-xl" /></a>

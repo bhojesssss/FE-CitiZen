@@ -1,23 +1,26 @@
 import React from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import HowItWorks from './components/HowItWorks';
-import WasteCategories from './components/WasteCategories';
-import ImpactStats from './components/ImpactStats';
-import CTA from './components/CTA';
-import Footer from './components/Footer';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import PublicLayout from './layouts/PublicLayout';
+import Home from './pages/Home';
+import Marketplace from './pages/Marketplace';
+import DashboardProfile from './pages/DashboardProfile';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <HowItWorks />
-      <WasteCategories />
-      <ImpactStats />
-      <CTA />
-      <Footer />
-    </>
+    <Routes>
+      <Route element={<PublicLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/marketplace" element={<Marketplace />} />
+        <Route path="/dashboard" element={<DashboardProfile />} />
+      </Route>
+
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 
