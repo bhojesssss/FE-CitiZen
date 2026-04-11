@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   FaFilter,
   FaHeart,
@@ -15,6 +16,7 @@ const Marketplace = () => {
   const [activeCategory, setActiveCategory] = useState('All Categories');
   const [activeTab, setActiveTab] = useState('Sport');
   const [favorites, setFavorites] = useState(() => new Set());
+  const [priceRange, setPriceRange] = useState(30);
 
   useEffect(() => {
     const t = window.setTimeout(() => setMounted(true), 30);
@@ -117,9 +119,13 @@ const Marketplace = () => {
     return items.filter((it) => {
       const matchCategory = activeCategory === 'All Categories' || it.category === activeCategory;
       const matchSearch = !q || [it.title, it.category, it.price].some((x) => x.toLowerCase().includes(q));
-      return matchCategory && matchSearch;
+      
+      const numericPrice = parseInt(it.price.replace(/[^\d]/g, ''), 10);
+      const matchPrice = numericPrice <= priceRange * 1000;
+      
+      return matchCategory && matchSearch && matchPrice;
     });
-  }, [items, activeCategory, search]);
+  }, [items, activeCategory, search, priceRange]);
 
   return (
     <div className="min-h-screen bg-primary-50 font-sans">
@@ -200,10 +206,24 @@ const Marketplace = () => {
             </div>
 
             <div className="mt-6 rounded-[20px] bg-[#F9FBF9] border border-gray-100 p-5">
-              <div className="text-gray-900 font-bold">Price Range</div>
-              <div className="text-gray-500 text-sm mt-1">Average price is ≤ Rp 30.000</div>
-              <div className="mt-4 h-12 rounded-[18px] bg-primary-50 border border-primary-100 flex items-center justify-center text-primary font-extrabold">
-                Rp 3k — Rp 30k
+              <div className="flex justify-between items-center">
+                <div className="text-gray-900 font-bold">Price Max</div>
+                <div className="text-primary text-sm font-extrabold">Rp {priceRange}k</div>
+              </div>
+              <div className="text-gray-500 text-sm mt-1">Up to Rp {priceRange}.000</div>
+              <div className="mt-4">
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={priceRange}
+                  onChange={(e) => setPriceRange(Number(e.target.value))}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary focus:outline-none focus:ring-2 focus:ring-primary-100"
+                />
+                <div className="flex justify-between text-xs text-gray-500 mt-2 font-semibold">
+                  <span>Rp 0</span>
+                  <span>Rp 100k+</span>
+                </div>
               </div>
             </div>
 
@@ -320,9 +340,12 @@ const Marketplace = () => {
 
                       <div className="mt-4 flex items-center justify-between">
                         <div className="text-primary font-extrabold">{it.price}</div>
-                        <button className="px-4 py-2.5 rounded-[14px] bg-primary text-white font-bold shadow-md transition-all duration-300 group-hover:-translate-y-[2px] group-hover:shadow-xl">
+                        <Link 
+                          to={`/marketplace/${it.id}`}
+                          className="px-4 py-2.5 rounded-[14px] bg-primary text-white font-bold shadow-md transition-all duration-300 hover:-translate-y-[2px] hover:shadow-xl inline-block text-center"
+                        >
                           Detail
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   </article>

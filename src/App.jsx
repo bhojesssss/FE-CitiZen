@@ -4,6 +4,7 @@ import PublicLayout from './layouts/PublicLayout';
 import Home from './pages/Home';
 import Marketplace from './pages/Marketplace';
 import DashboardProfile from './pages/DashboardProfile';
+import ListingDetail from './pages/ListingDetail';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
@@ -13,6 +14,7 @@ function App() {
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/marketplace" element={<Marketplace />} />
+        <Route path="/marketplace/:id" element={<ListingDetail />} />
         <Route path="/dashboard" element={<DashboardProfile />} />
       </Route>
 
