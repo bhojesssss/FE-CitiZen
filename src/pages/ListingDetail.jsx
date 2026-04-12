@@ -103,7 +103,7 @@ const ListingDetail = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <button 
           onClick={() => navigate(-1)}
-          className="inline-flex items-center gap-2 mb-8 text-gray-600 hover:text-primary transition-colors font-semibold"
+          className="inline-flex items-center gap-2 mb-6 lg:mb-8 text-gray-600 hover:text-primary transition-colors font-semibold"
         >
           <FaArrowLeft /> Back to Marketplace
         </button>
@@ -111,7 +111,7 @@ const ListingDetail = () => {
         <div className="bg-white rounded-[32px] shadow-xl border border-gray-100 overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0 lg:gap-8">
             {/* Image / Graphic Section */}
-            <div className={`p-8 lg:p-12 h-[300px] md:h-auto bg-gradient-to-br ${data.imageTone} relative flex items-center justify-center`}>
+            <div className={`p-5 sm:p-8 lg:p-12 h-[250px] sm:h-[300px] md:h-auto min-h-[250px] bg-gradient-to-br ${data.imageTone} relative flex items-center justify-center`}>
               <div className="absolute inset-0 opacity-[0.15]" style={{ backgroundImage: 'radial-gradient(circle, #388E3C 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
               <div className="relative z-10 w-full max-w-[280px] aspect-square rounded-full border-[8px] border-white/40 shadow-2xl bg-white flex items-center justify-center overflow-hidden">
                  <FaBox className="text-8xl text-primary/20 hover:scale-110 transition-transform duration-500" />
@@ -124,7 +124,7 @@ const ListingDetail = () => {
             </div>
 
             {/* Content Section */}
-            <div className="p-8 lg:p-12 flex flex-col justify-center">
+            <div className="p-5 sm:p-8 lg:p-12 flex flex-col justify-center">
               <div className="flex items-center gap-2 text-sm font-bold text-gray-500 mb-3 uppercase tracking-wider">
                 <span>{data.category}</span>
                 <span>•</span>

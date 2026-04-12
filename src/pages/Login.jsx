@@ -6,6 +6,12 @@ import AuthShell from './AuthShell';
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '', remember: true });
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    localStorage.setItem('isAuthenticated', 'true');
+    window.location.href = '/profile';
+  };
+
   return (
     <AuthShell
       title="Sign in"
@@ -19,7 +25,7 @@ const Login = () => {
         </div>
       }
     >
-      <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+      <form className="space-y-5" onSubmit={handleLogin}>
         <label className="block">
           <span className="text-sm font-semibold text-gray-700">Email Address</span>
           <div className="mt-2 relative">

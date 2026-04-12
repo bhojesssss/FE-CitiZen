@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   FaBell,
   FaBuilding,
@@ -127,7 +128,13 @@ const DashboardProfile = () => {
             </nav>
 
             <div className="p-5 pt-2">
-              <button className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-[16px] border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all duration-300 hover:-translate-y-[2px]">
+              <button 
+                onClick={() => {
+                  localStorage.removeItem('isAuthenticated');
+                  window.location.href = '/profile';
+                }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-[16px] border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all duration-300 hover:-translate-y-[2px]"
+              >
                 <FaSignOutAlt className="text-sm" />
                 <span className="font-semibold text-sm">Logout</span>
               </button>
@@ -189,9 +196,12 @@ const DashboardProfile = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-3">
-                  <button className="bg-white text-primary px-5 py-3 rounded-[16px] font-bold shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                  <Link 
+                    to="/create-listing"
+                    className="bg-white text-primary px-5 py-3 rounded-[16px] font-bold shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl block text-center"
+                  >
                     Create Listing
-                  </button>
+                  </Link>
                   <button className="bg-white/10 backdrop-blur border border-white/20 text-white px-5 py-3 rounded-[16px] font-bold transition-all duration-300 hover:bg-white/15 hover:-translate-y-1">
                     View Marketplace
                   </button>

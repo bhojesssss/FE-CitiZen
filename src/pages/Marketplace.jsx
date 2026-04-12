@@ -14,9 +14,10 @@ const Marketplace = () => {
   const [mounted, setMounted] = useState(false);
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('All Categories');
-  const [activeTab, setActiveTab] = useState('Sport');
+  const [activeTab, setActiveTab] = useState('All');
   const [favorites, setFavorites] = useState(() => new Set());
   const [priceRange, setPriceRange] = useState(30);
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     const t = window.setTimeout(() => setMounted(true), 30);
@@ -27,21 +28,22 @@ const Marketplace = () => {
     () => [
       'All Categories',
       'Minyak Jelantah',
-      'Organik',
-      'Plastik',
-      'Seafood Shell',
-      'Kayu',
+      'Limbah Organik',
+      'Cangkang Seafood',
+      'Plastik HDPE',
+      'Serbuk Kayu',
+      'E-Waste',
     ],
     []
   );
 
   const tabs = useMemo(
-    () => ['All', 'Deals', 'Crypto', 'Fashion', 'Health & Wellness', 'Art', 'Home', 'Sport', 'Music', 'Gaming'],
+    () => ['All', 'Minyak Jelantah', 'Limbah Organik', 'Cangkang Seafood', 'Plastik HDPE', 'Serbuk Kayu', 'E-Waste'],
     []
   );
 
-  const brands = useMemo(
-    () => ['Adidas', 'Columbia', 'Demix', 'New Balance', 'Nike', 'Xiaomi', 'Asics'],
+  const cities = useMemo(
+    () => ['Jakarta', 'Surabaya', 'Bandung', 'Medan', 'Makassar'],
     []
   );
 
@@ -143,9 +145,12 @@ const Marketplace = () => {
                   className="w-full pl-11 pr-4 py-3 rounded-[18px] border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-100 focus:border-primary-100 transition"
                 />
               </div>
-              <button className="hidden sm:inline-flex items-center gap-2 px-4 py-3 rounded-[18px] border border-gray-200 bg-white hover:bg-primary-50 transition-all duration-300 hover:-translate-y-[2px]">
+              <button 
+                onClick={() => setShowFilters(!showFilters)}
+                className="lg:hidden inline-flex items-center gap-2 px-4 py-3 rounded-[18px] border border-gray-200 bg-white hover:bg-primary-50 transition-all duration-300"
+              >
                 <FaSlidersH className="text-gray-600" />
-                <span className="text-sm font-semibold text-gray-700">Filters</span>
+                <span className="hidden sm:inline text-sm font-semibold text-gray-700">Filters</span>
               </button>
             </div>
 
@@ -158,9 +163,12 @@ const Marketplace = () => {
                   <FaShoppingCart className="mx-auto text-gray-700" />
                 </button>
               </div>
-              <button className="px-5 py-3 rounded-[18px] bg-primary text-white font-bold shadow-md transition-all duration-300 hover:-translate-y-[2px] hover:shadow-xl">
+              <Link 
+                to="/create-listing"
+                className="px-5 py-3 rounded-[18px] bg-primary text-white font-bold shadow-md transition-all duration-300 hover:-translate-y-[2px] hover:shadow-xl block text-center"
+              >
                 Create Listing
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -193,7 +201,7 @@ const Marketplace = () => {
           ].join(' ')}
         >
           {/* Filters */}
-          <aside className="bg-white rounded-[24px] shadow-lg border border-gray-100 p-5 sm:p-6 h-fit">
+          <aside className={`bg-white rounded-[24px] shadow-lg border border-gray-100 p-5 sm:p-6 h-fit ${showFilters ? 'block' : 'hidden lg:block'}`}>
             <div className="flex items-start justify-between gap-4">
               <div>
                 <div className="text-gray-900 font-extrabold tracking-tight text-lg">Filters</div>
@@ -230,7 +238,7 @@ const Marketplace = () => {
             <div className="mt-5 rounded-[20px] bg-[#F9FBF9] border border-gray-100 p-5">
               <div className="text-gray-900 font-bold">Category</div>
               <div className="mt-3 grid grid-cols-2 gap-2">
-                {categories.slice(0, 6).map((c) => {
+                {categories.slice(0, 7).map((c) => {
                   const active = activeCategory === c;
                   return (
                     <button
@@ -249,25 +257,31 @@ const Marketplace = () => {
             </div>
 
             <div className="mt-5 rounded-[20px] bg-[#F9FBF9] border border-gray-100 p-5">
-              <div className="text-gray-900 font-bold">Star Rating</div>
-              <div className="mt-3 flex items-center gap-1 text-yellow-500">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <FaStar key={i} className={i < 4 ? '' : 'opacity-30'} />
+              <div className="text-gray-900 font-bold">Status</div>
+              <div className="mt-4 space-y-3">
+                {['Semua', 'Tersedia', 'Dalam Nego', 'Terjual'].map((status, i) => (
+                  <label key={status} className="flex items-center gap-3 text-sm text-gray-700">
+                    <input
+                      type="radio"
+                      name="status_filter"
+                      className="w-5 h-5 border-gray-300 text-primary focus:ring-primary-100"
+                      defaultChecked={i === 0}
+                    />
+                    <span className="font-semibold">{status}</span>
+                  </label>
                 ))}
-                <span className="ml-2 text-gray-500 text-sm font-semibold">4+ stars</span>
               </div>
             </div>
 
             <div className="mt-5 rounded-[20px] bg-[#F9FBF9] border border-gray-100 p-5">
-              <div className="text-gray-900 font-bold">Brand (Industry)</div>
+              <div className="text-gray-900 font-bold">Kota</div>
               <div className="mt-4 space-y-3">
-                {brands.map((b) => (
-                  <label key={b} className="flex items-center justify-between gap-3 text-sm text-gray-700">
-                    <span className="font-semibold">{b}</span>
+                {cities.map((city) => (
+                  <label key={city} className="flex items-center justify-between gap-3 text-sm text-gray-700">
+                    <span className="font-semibold">{city}</span>
                     <input
                       type="checkbox"
                       className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary-100"
-                      defaultChecked={b === 'Nike'}
                     />
                   </label>
                 ))}

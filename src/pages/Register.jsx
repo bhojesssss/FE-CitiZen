@@ -17,6 +17,12 @@ const Register = () => {
 
   const accountTypes = useMemo(() => ['SME', 'Industry'], []);
 
+  const handleRegister = (e) => {
+    e.preventDefault();
+    localStorage.setItem('isAuthenticated', 'true');
+    window.location.href = '/profile';
+  };
+
   return (
     <AuthShell
       title="Create account"
@@ -30,7 +36,7 @@ const Register = () => {
         </div>
       }
     >
-      <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+      <form className="space-y-5" onSubmit={handleRegister}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <label className="block">
             <span className="text-sm font-semibold text-gray-700">Full Name</span>
